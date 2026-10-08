@@ -19,6 +19,21 @@ gibt es nicht. Auftrag: [`mission.md`](mission.md), Handbuch des Agenten: [`CLAU
                                            (Website)       (Website)      (yfinance)     (journal.md)
 ```
 
+## Schnellstart (Windows)
+
+1. Installieren: [Python](https://www.python.org/downloads/) (Haken bei „Add python.exe to PATH“) und
+   [Git for Windows](https://git-scm.com/download/win).
+2. PowerShell öffnen und einfügen:
+   ```powershell
+   git clone -b claude/eager-lamport-7dvixq https://github.com/JP19Claude/planspiel $HOME\boerse-agent
+   cd $HOME\boerse-agent
+   powershell -ExecutionPolicy Bypass -File setup.ps1
+   ```
+3. Das Skript installiert alles, fragt (optional) nach den Zugangsdaten, öffnet den Browser zum
+   Einloggen und danach zur Seitenanalyse. Am Ende öffnet sich der Ordner mit den Screenshots.
+
+Linux/Mac: dasselbe mit `./setup.sh`.
+
 ## Inhalt
 
 | Datei | Zweck |
