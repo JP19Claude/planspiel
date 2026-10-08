@@ -1,0 +1,53 @@
+# boerse-agent Konfiguration
+# Nach Änderungen neu siegeln:  python tools/integrity.py seal
+
+models:
+  trading_run: claude-sonnet-5-5     # normale Handelsläufe
+  weekly_review: claude-opus-5-5     # Wochen-Review am Sonntag
+
+agent:
+  claude_command: claude             # Pfad zur Claude-CLI, falls nicht im PATH
+  allowed_tools: "Bash,Read,Write,Edit,WebSearch,WebFetch"
+  timeout_minutes: 45                # Lauf wird danach hart beendet
+  max_budget_usd: null               # optional Kostenbremse pro Lauf, z. B. 2.0
+  extra_args: []                     # weitere CLI-Argumente für claude
+  prompts:
+    trading: "Lies mission.md und journal.md und führe einen Handelslauf aus"
+    review: >-
+      Lies mission.md, journal.md und CLAUDE.md und führe den wöchentlichen Review aus
+      (Abschnitt „Wochen-Review“ in CLAUDE.md): Prüfe Journal und Performance und ergänze
+      mission.md nur im Abschnitt „## Lehren aus den Wochen-Reviews“. Platziere keine Orders.
+
+game:
+  name: Planspiel Börse 2026
+  base_url: https://www.planspiel-boerse.de
+  timezone: Europe/Berlin
+  start: 2026-10-01                  # erster Handelstag (laut Sparkasse/Planspiel-Kalender)
+  end: 2027-01-25                    # letzter Handelstag – bitte im Spiel prüfen
+  start_capital: 50000               # Startkapital in EUR
+  # Handelszeiten richten sich laut Spiel nach der Börse Stuttgart (Aktien ab 7:30,
+  # strukturierte Produkte ab 8:00, bis 22:00). Konservativ: 08:00–22:00, Mo–Fr.
+  trading_hours:
+    days: [mon, tue, wed, thu, fri]
+    open: "08:00"
+    close: "22:00"
+  # Handelsfreie Tage im Spielzeitraum (Börse Stuttgart) – bitte mit den Spielregeln abgleichen
+  holidays:
+    - 2026-12-24
+    - 2026-12-25
+    - 2026-12-31
+    - 2027-01-01
+
+browser:
+  headless: true
+  channel: null                      # z. B. "msedge" oder "chrome", um den installierten Browser zu nutzen
+  executable_path: null
+  storage_state: .auth/storage_state.json
+  timeout_ms: 15000
+  slow_mo_ms: 0
+  viewport: {width: 1400, height: 1000}
+
+order:
+  verify_attempts: 6                 # so oft wird die Orderübersicht nach dem Absenden gelesen
+  verify_wait_seconds: 5
+  number_format: de                  # Eingabe von Limits als 123,45

@@ -1,0 +1,15 @@
+# Zugangsdaten und Session
+.env
+.auth/
+
+# Laufzeitdaten
+logs/*
+!logs/.gitkeep
+journal.md
+STOP
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/

@@ -1,0 +1,43 @@
+# Selektoren der lokalen Fake-Spielseite (nur für Tests)
+confirmed: true
+urls:
+  login: /login.html
+  depot: /depot.html
+  orders: /orders.html
+  order_form: /order.html
+login:
+  username_input: "#user"
+  password_input: "#pass"
+  submit_button: "#login-btn"
+  logged_in_indicator: "#logout"
+  captcha_indicator: "#captcha"
+  error_message: "#login-error"
+depot:
+  cash: "#cash"
+  total_value: "#total"
+  positions_table: "#positions"
+orders:
+  open_orders_table: "#open-orders"
+  history_table: "#history"
+order_columns:
+  security: Wertpapier
+  side: Art
+  quantity: Stück
+  limit: Limit
+  status: Status
+side_labels:
+  buy: ["Kauf"]
+  sell: ["Verkauf"]
+order_form:
+  search_input: "#search"
+  search_result_item: "li.result"
+  security_identity: "#identity"
+  side_buy: "#side-buy"
+  side_sell: "#side-sell"
+  quantity_input: "#qty"
+  order_type_market: "#type-market"
+  order_type_limit: "#type-limit"
+  limit_input: "#limit"
+  submit_button: "#submit"
+  success_indicator: "#success"
+  error_message: "#error"

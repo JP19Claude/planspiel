@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(/tools/**)",
+      "Edit(/logs/**)",
+      "Edit(/scheduler/**)",
+      "Edit(/.claude/**)",
+      "Edit(/config.yaml)",
+      "Edit(/selectors.yaml)",
+      "Edit(/agent-settings.json)",
+      "Edit(/CLAUDE.md)",
+      "Edit(/requirements.txt)",
+      "Edit(/run_agent.sh)",
+      "Edit(/run_agent.ps1)",
+      "Edit(/run_weekly_review.sh)",
+      "Edit(/run_weekly_review.ps1)",
+      "Edit(/.gitignore)",
+      "Edit(/STOP)",
+      "Read(/.env)",
+      "Read(/.auth/**)",
+      "Read(~/.boerse-agent/**)",
+      "Edit(~/.boerse-agent/**)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell|Edit|Write|MultiEdit|NotebookEdit|Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR}/tools/agent_hook.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+# Selektoren für die Planspiel-Website.
+#
+# STATUS: NOCH NICHT FESTGELEGT. Die Seitenstruktur wird zuerst mit
+#   python tools/explore.py --interactive
+# analysiert. Danach legen wir die Werte gemeinsam fest. Solange
+# "confirmed: false" gilt, verweigert order.py jede echte Order (--dry-run geht).
+#
+# Syntax: Playwright-Selektoren, z. B.
+#   "#username"   "input[name='password']"   "button:has-text('Anmelden')"
+#   "role=button[name='Kaufen']"   "text=Abmelden"   "[data-testid='cash']"
+# Leere Werte (null) = nicht vorhanden/nicht benutzt.
+# Nach Änderungen neu siegeln:  python tools/integrity.py seal
+
+confirmed: false
+
+frame: null                    # falls das Spiel in einem iframe läuft: Selektor des iframes
+
+urls:                          # absolute URLs oder Pfade relativ zu game.base_url
+  login: null
+  depot: null
+  orders: null                 # Orderübersicht (offene Orders + Historie)
+  order_form: null             # Ordermaske; darf {symbol} enthalten, dann ohne Suche
+
+common:
+  cookie_accept: null          # Cookie-Banner wegklicken (optional)
+
+login:
+  username_input: null
+  password_input: null
+  submit_button: null
+  logged_in_indicator: null    # Element, das NUR eingeloggt sichtbar ist (z. B. Abmelden-Link)
+  captcha_indicator: null
+  twofa_indicator: null
+  error_message: null
+
+depot:
+  cash: null                   # Element mit dem verfügbaren Cash
+  total_value: null            # Depotgesamtwert
+  depot_value: null            # Wert der Wertpapiere (optional)
+  performance: null            # Performance (optional)
+  positions_table: null        # <table> mit den Positionen
+  empty_indicator: null        # Hinweis "keine Positionen" (optional)
+
+orders:
+  open_orders_table: null
+  open_empty_indicator: null
+  history_table: null
+  history_empty_indicator: null
+
+order_columns:                 # Spaltenüberschriften in der Orderübersicht (exakter Text)
+  security: null               # z. B. "Wertpapier"
+  side: null                   # z. B. "Ordertyp" / "Art"
+  quantity: null               # z. B. "Stück"
+  limit: null
+  status: null
+
+side_labels:                   # Wie die Orderübersicht Kauf/Verkauf schreibt
+  buy: ["Kauf"]
+  sell: ["Verkauf"]
+
+order_form:
+  search_input: null           # Suchfeld für ISIN/WKN/Name
+  search_submit: null          # optional, falls die Suche einen Button braucht
+  search_result_item: null     # ein Eintrag der Trefferliste
+  security_identity: null      # Element in der Ordermaske mit Name/WKN/ISIN des Papiers
+  side_buy: null               # Klick-Element "Kauf"
+  side_sell: null              # Klick-Element "Verkauf"
+  side_select: null            # alternativ: <select> für Kauf/Verkauf
+  quantity_input: null
+  order_type_market: null      # Klick-Element "Market/Bestens" (optional)
+  order_type_limit: null       # Klick-Element "Limit"
+  order_type_select: null      # alternativ: <select> für den Ordertyp
+  limit_input: null
+  select_labels:               # Options-Texte, falls <select> benutzt wird
+    buy: null
+    sell: null
+    market: null
+    limit: null
+  preview_button: null         # optional: "Order prüfen" (Zwischenschritt)
+  submit_button: null          # Klick, der die Order abschickt
+  confirm_button: null         # optional: Bestätigung im Dialog
+  success_indicator: null      # Erfolgsmeldung nach dem Absenden
+  error_message: null          # Fehlermeldung nach dem Absenden

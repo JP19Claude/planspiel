@@ -1,0 +1,13 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Order</title><script src="app.js"></script></head>
+<body><div id="hdr"></div><h1>Order erfassen</h1>
+<input id="search" placeholder="Name, WKN oder ISIN"><ul id="results"></ul>
+<div id="order-form" style="display:none">
+  <div id="identity"></div>
+  <button id="side-buy">Kauf</button><button id="side-sell">Verkauf</button>
+  <input id="qty" placeholder="Stück">
+  <button id="type-market">Market</button><button id="type-limit">Limit</button>
+  <input id="limit" style="display:none" placeholder="Limit">
+  <button id="submit">Order abschicken</button>
+</div>
+<div id="success" style="display:none"></div><div id="error" style="display:none"></div>
+<script>header(); initOrder();</script></body></html>

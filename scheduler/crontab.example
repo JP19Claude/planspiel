@@ -1,0 +1,12 @@
+# boerse-agent: Zeitplan fuer cron (Linux/Mac). Einrichten mit:  crontab -e
+# Pfade anpassen! PATH muss die Claude-CLI enthalten (which claude).
+# CRON_TZ wird von cronie/Vixie-cron unterstuetzt; sonst muss die Systemzeitzone Europe/Berlin sein.
+CRON_TZ=Europe/Berlin
+PATH=/usr/local/bin:/usr/bin:/bin:/home/DEINNAME/.local/bin
+BA=/home/DEINNAME/boerse-agent
+
+# Handelslauf werktags 10:00 und 16:30
+0 10 * * 1-5   $BA/run_agent.sh          >> $BA/logs/cron.log 2>&1
+30 16 * * 1-5  $BA/run_agent.sh          >> $BA/logs/cron.log 2>&1
+# Wochen-Review sonntags 18:00
+0 18 * * 0     $BA/run_weekly_review.sh  >> $BA/logs/cron.log 2>&1
